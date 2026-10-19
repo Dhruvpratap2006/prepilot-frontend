@@ -1,0 +1,649 @@
+// Theme Variables
+$bg-color: #060b10;
+$card-bg: rgba(13, 22, 33, 0.7);
+$card-border: rgba(56, 189, 248, 0.15);
+$card-border-focus: rgba(56, 189, 248, 0.4);
+$accent-cyan: #b2f5ea;
+$accent-cyan-hover: #81e6d9;
+$text-primary: #f8fafc;
+$text-secondary: #94a3b8;
+$text-muted: #64748b;
+$input-bg: rgba(4, 9, 14, 0.6);
+$step-bg: #cbebf6;
+$step-text: #0b1d28;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+// Global Body Styling for True Fullscreen
+html, body {
+  width: 100%;
+  height: 100%;
+  background-color: $bg-color;
+  color: $text-primary;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow-x: hidden;
+
+  // scrollbar hide — scroll kaam karega, bas dikhega nahi
+  scrollbar-width: none;        // Firefox
+  -ms-overflow-style: none;     // old Edge/IE
+
+  &::-webkit-scrollbar {
+    display: none;              // Chrome, Safari, new Edge
+  }
+}
+
+// Main Page Container — Fills Viewport with Generous Outer Margin/Padding
+.home-page {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  padding: 1.5rem 4rem 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;   // ⬅ FIX: space-between hata diya — ab gaps predictable rahenge
+  gap: 2rem;                   // ⬅ ab sections ke beech consistent, fixed spacing
+
+  background-color: #050a0e;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(14, 116, 144, 0.22) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(56, 189, 248, 0.18) 0px, transparent 50%);
+  background-attachment: fixed;
+  background-size: cover;
+
+  @media (max-width: 768px) {
+    padding: 1.5rem 1rem;
+    gap: 1.5rem;
+  }
+}
+
+// Header Section
+// Header Section
+.page-header {
+  text-align: center;
+  margin-bottom: 0;
+
+  .eyebrow {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #38bdf8;
+    margin-bottom: 0.4rem;
+    display: block;
+  }
+
+  h1 {
+    font-size: 2.25rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    font-size: 0.95rem;
+    color: $text-secondary;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.5;
+
+    .highlight {
+      color: $accent-cyan;
+      font-weight: 600;
+    }
+  }
+}
+
+// Main Form Layout Container
+.interview-card {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  &__body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    align-items: stretch;   // ⬅ dono panels ki height match rahegi (explicit rakha)
+
+    @media (max-width: 820px) {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+}
+
+// Card Panel Styles
+.panel {
+  background: $card-bg;
+  border: 1px solid $card-border;
+  border-radius: 20px;
+  padding: 2rem;
+  backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;   // ⬅ FIX: space-between hata diya
+  gap: 1.5rem;                    // ⬅ children ke beech consistent gap ab yahan se milta hai
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0;   // ⬅ gap parent se aa raha hai, extra margin hata diya
+
+    .step-number {
+      width: 32px;
+      height: 32px;
+      background-color: $step-bg;
+      color: $step-text;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+
+    .panel__icon {
+      display: inline-flex;
+      align-items: center;
+      color: #38bdf8;
+    }
+
+    h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 0.25rem 0.55rem;
+      border-radius: 6px;
+      background: rgba(56, 189, 248, 0.12);
+      color: #38bdf8;
+      margin-left: auto;
+    }
+  }
+
+  &__textarea {
+    width: 100%;
+    flex: 1;
+    min-height: 190px;
+    background: $input-bg;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 1.1rem;
+    color: $text-primary;
+    font-family: inherit;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    resize: none;
+    outline: none;
+    transition: border-color 0.2s ease;
+
+    &::placeholder {
+      color: rgba(148, 163, 184, 0.4);
+    }
+
+    &:focus {
+      border-color: $card-border-focus;
+    }
+
+    &--short {
+      min-height: 150px;   // ⬅ FIX: 100px se 150px — ab Job Description textarea ke sath better balance
+    }
+  }
+
+  .char-counter {
+    display: block;
+    text-align: right;
+    font-size: 0.75rem;
+    color: $text-muted;
+  }
+}
+
+.panel-divider {
+  display: none;
+}
+
+// Right Panel (About You) Spacing Adjustments
+.panel--right {
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: $text-secondary;
+
+    .badge {
+      margin-left: auto;
+    }
+  }
+
+  .upload-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .dropzone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+    background: $input-bg;
+    border: 1px dashed $card-border;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      border-color: $card-border-focus;
+      background: rgba(13, 22, 33, 0.9);
+    }
+
+    &__icon {
+      color: #38bdf8;
+      margin-bottom: 0.35rem;
+    }
+
+    &__title {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: $text-primary;
+    }
+
+    &__subtitle {
+      font-size: 0.75rem;
+      color: $text-muted;
+      margin-top: 0.2rem;
+    }
+  }
+
+  .or-divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: $text-muted;
+    font-size: 0.75rem;
+    font-weight: 600;
+
+    &::before,
+    &::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    span {
+      padding: 0 0.75rem;
+    }
+  }
+
+  .self-description {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    flex: 1;   // ⬅ FIX: ab self-description bhi bacha hua space le leta hai, jaisa Job Description karta hai
+  }
+
+  .info-box {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin-top: auto;   // ⬅ FIX: Tip box ab hamesha panel ke bottom pe anchor rahega
+    padding: 0.75rem 1rem;
+    background: rgba(56, 189, 248, 0.06);
+    border-radius: 10px;
+    font-size: 0.8rem;
+    color: $text-secondary;
+
+    &__icon {
+      color: #38bdf8;
+      flex-shrink: 0;
+    }
+
+    p strong {
+      color: $text-primary;
+    }
+  }
+}
+
+// Action Button Footer Spacing
+.interview-card__footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+
+  .footer-info {
+    font-size: 0.78rem;
+    color: $text-muted;
+  }
+
+  .generate-btn {
+    width: 100%;
+    max-width: 440px;
+    padding: 1.1rem 2.25rem;
+    background: $accent-cyan;
+    color: $step-text;
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    cursor: pointer;
+    box-shadow: 0 0 25px rgba(178, 245, 234, 0.3);
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: $accent-cyan-hover;
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+
+// Recent Reports List
+.recent-reports {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 0.5rem;   // ⬅ margin-top hata diya, parent gap se milta hai ab
+
+  h2 {
+    font-size: 0.85rem;
+    margin-bottom: 0.85rem;
+    color: $text-secondary;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+ .reports-list {
+  list-style: none;
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+
+  // scrollbar hide — scroll kaam karega, bas dikhega nahi
+  scrollbar-width: none;        // Firefox
+  -ms-overflow-style: none;     // old Edge/IE
+
+  &::-webkit-scrollbar {
+    display: none;              // Chrome, Safari, new Edge
+  }
+}
+
+  .report-item {
+    min-width: 240px;
+    background: $card-bg;
+    border: 1px solid $card-border;
+    border-radius: 14px;
+    padding: 1rem;
+    cursor: pointer;
+    flex-shrink: 0;
+
+    &__top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+
+      h3 {
+        font-size: 0.9rem;
+        color: $text-primary;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 150px;
+      }
+    }
+
+    .score-pill {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.2rem 0.55rem;
+      border-radius: 10px;
+
+      &.score--high { background: rgba(34, 197, 94, 0.15); color: #4ade80; }
+      &.score--mid { background: rgba(234, 179, 8, 0.15); color: #facc15; }
+      &.score--low { background: rgba(239, 68, 68, 0.15); color: #f87171; }
+    }
+
+    .report-meta {
+      font-size: 0.75rem;
+      color: $text-muted;
+    }
+  }
+}
+
+// Bottom Page Links
+.page-footer {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  margin-top: 0.5rem;
+  padding-bottom: 2.5rem;
+
+  a {
+    color: $text-muted;
+    font-size: 0.8rem;
+    text-decoration: none;
+
+    &:hover {
+      color: $text-secondary;
+    }
+  }
+}
+
+/* ===============================
+   Selected PDF UI Card
+================================== */
+.selected-pdf-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #090e15;
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: 12px;
+  padding: 12px 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    border-color: rgba(56, 189, 248, 0.4);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  }
+
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+  }
+
+  .pdf-badge {
+    width: 38px;
+    height: 40px;
+    border-radius: 8px;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    gap: 1px;
+
+    &__icon {
+      color: #f87171;
+    }
+
+    span {
+      font-size: 8px;
+      font-weight: 800;
+      color: #f87171;
+      letter-spacing: 0.5px;
+      line-height: 1;
+    }
+  }
+
+  .pdf-meta {
+    min-width: 0;
+
+    &__name {
+      color: #f1f5f9;
+      font-size: 13.5px;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 210px;
+    }
+
+    &__sub {
+      color: #94a3b8;
+      font-size: 11px;
+      margin-top: 2px;
+    }
+  }
+
+  &__remove {
+    background: transparent;
+    border: none;
+    color: #64748b;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+
+    &:hover {
+      color: #f87171;
+      background: rgba(248, 113, 113, 0.12);
+    }
+  }
+}
+
+// Action Selection Grid — two equal cards for choosing report vs mock interview
+.action-grid {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+.action-card {
+  background: $card-bg;
+  border: 1px solid $card-border;
+  border-radius: 20px;
+  padding: 2rem;
+  backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+
+  &:hover {
+    border-color: $card-border-focus;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  }
+
+  &--active {
+    border-color: $card-border-focus;
+    box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.3);
+  }
+
+  &__icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: rgba(56, 189, 248, 0.12);
+    color: #38bdf8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.25rem;
+  }
+
+  h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: $text-primary;
+  }
+
+  p {
+    font-size: 0.88rem;
+    color: $text-secondary;
+    line-height: 1.5;
+  }
+
+  &__cta {
+    margin-top: auto;
+    padding-top: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: $accent-cyan;
+  }
+}
+
+.slider-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.slider-arrow {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid $card-border;
+  background: $card-bg;
+  color: $accent-cyan;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: $card-border-focus;
+    background: rgba(56, 189, 248, 0.12);
+  }
+}

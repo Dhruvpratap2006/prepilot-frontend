@@ -1,0 +1,365 @@
+// Variables & Theme Colors
+$bg-color: #060b10;
+$card-bg: rgba(13, 22, 33, 0.7);
+$card-border: rgba(56, 189, 248, 0.15);
+$card-border-focus: rgba(56, 189, 248, 0.4);
+$accent-cyan: #38bdf8;
+$accent-cyan-hover: #7dd3fc;
+$accent-teal: #b2f5ea;
+$accent-teal-hover: #81e6d9;
+$text-primary: #f8fafc;
+$text-secondary: #94a3b8;
+$text-muted: #64748b;
+$input-bg: rgba(4, 9, 14, 0.6);
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+// Main Page Container
+.auth-page {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  background-color: #050a0e;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(14, 116, 144, 0.22) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(56, 189, 248, 0.18) 0px, transparent 50%);
+  background-attachment: fixed;
+  background-size: cover;
+  overflow-x: hidden;
+
+  @media (max-width: 480px) {
+    padding: 1rem;
+  }
+}
+
+// Split Auth Card Container
+.auth-card {
+  width: 100%;
+  max-width: 960px;
+  min-height: 560px;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  background: $card-bg;
+  border: 1px solid $card-border;
+  border-radius: 24px;
+  backdrop-filter: blur(16px);
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+
+  @media (max-width: 820px) {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    min-height: auto;
+  }
+}
+
+// ── Left Side: Branding Panel ──
+.branding-panel {
+  position: relative;
+  background: linear-gradient(135deg, rgba(14, 116, 144, 0.15) 0%, rgba(13, 22, 33, 0.8) 100%);
+  border-right: 1px solid $card-border;
+  padding: 3rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+
+  @media (max-width: 820px) {
+    display: none; // Hide illustration panel on mobile for clean form layout
+  }
+
+  .visual-blob {
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.25) 0%, transparent 70%);
+    filter: blur(40px);
+    pointer-events: none;
+  }
+
+  .mascot-wrapper {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 260px;
+    margin: auto 0;
+
+    .mascot-img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+    }
+  }
+
+  .branding-text {
+    position: relative;
+    z-index: 1;
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 0.6rem;
+      line-height: 1.25;
+    }
+
+    p {
+      font-size: 0.88rem;
+      color: $text-secondary;
+      line-height: 1.5;
+    }
+  }
+}
+
+// ── Right Side: Form Panel ──
+.form-panel {
+  padding: 3rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @media (max-width: 480px) {
+    padding: 2rem 1.5rem;
+  }
+
+  .form-container {
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+
+    .brand-icon {
+      color: $accent-cyan;
+      margin-bottom: 1.25rem;
+    }
+
+    h1 {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.4rem;
+    }
+
+    .subtitle {
+      font-size: 0.88rem;
+      color: $text-secondary;
+      margin-bottom: 1.75rem;
+
+      a {
+        color: $accent-cyan;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.2s ease;
+
+        &:hover {
+          color: $accent-cyan-hover;
+          text-decoration: underline;
+        }
+      }
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+  }
+}
+
+// ── Inputs & Fields ──
+.input-group {
+  width: 100%;
+
+  input {
+    width: 100%;
+    background: $input-bg;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 0.9rem 1rem;
+    color: $text-primary;
+    font-family: inherit;
+    font-size: 0.92rem;
+    outline: none;
+    transition: all 0.2s ease;
+
+    &::placeholder {
+      color: rgba(148, 163, 184, 0.4);
+    }
+
+    &:focus {
+      border-color: $card-border-focus;
+      background: rgba(4, 9, 14, 0.85);
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.1);
+    }
+  }
+
+  .password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    input {
+      padding-right: 2.75rem;
+    }
+
+    .toggle-pw {
+      position: absolute;
+      right: 0.85rem;
+      background: transparent;
+      border: none;
+      color: $text-muted;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.25rem;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: $text-primary;
+      }
+    }
+  }
+}
+
+// Action Button
+.primary-button {
+  width: 100%;
+  padding: 0.95rem;
+  background: $accent-teal;
+  color: #0b1d28;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  box-shadow: 0 0 20px rgba(178, 245, 234, 0.2);
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: $accent-teal-hover;
+    transform: translateY(-1px);
+    box-shadow: 0 0 25px rgba(178, 245, 234, 0.35);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// Divider Line
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 1.5rem 0;
+  color: $text-muted;
+  font-size: 0.78rem;
+  font-weight: 600;
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  span {
+    padding: 0 0.75rem;
+    text-transform: uppercase;
+  }
+}
+
+// ── Social Login Buttons ──
+.social-auth-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  .btn-social {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.85rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    color: $text-primary;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(255, 255, 255, 0.18);
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+
+// ── Loading Screen State ──
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #050a0e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+
+  .loading-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+
+    .loading-brand-icon {
+      color: $accent-cyan;
+    }
+
+    .loader {
+      width: 42px;
+      height: 42px;
+      border: 3.5px solid rgba(56, 189, 248, 0.1);
+      border-top-color: $accent-cyan;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    p {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: $text-secondary;
+      letter-spacing: 0.02em;
+    }
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
